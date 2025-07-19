@@ -52,8 +52,8 @@ struct ChatView: View {
         return CGSize(width: 100, height: 100)
         #else
         return CGSize(
-        width: room.localParticipant.isCameraEnabled() ? 100 : UIScreen.main.size.width - 64,
-        height: room.localParticipant.isCameraEnabled() ? 100 : UIScreen.main.size.width - 64
+            width: room.localParticipant.isCameraEnabled() ? 100 : UIScreen.main.bounds.size.width - 64,
+            height: room.localParticipant.isCameraEnabled() ? 100 : UIScreen.main.bounds.size.width - 64
         )
         #endif
     }
