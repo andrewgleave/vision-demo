@@ -1,14 +1,10 @@
 # flake8: noqa: E501
 
 import logging
-import asyncio
-import base64
 from dataclasses import dataclass, field
 from typing import Optional
+
 from dotenv import load_dotenv
-
-from google.genai import types
-
 from livekit.agents import (
     Agent,
     AgentSession,
@@ -17,17 +13,16 @@ from livekit.agents import (
     WorkerOptions,
     cli,
 )
-from livekit.agents.llm import ImageContent, function_tool
+from livekit.agents.llm import function_tool
 from livekit.plugins import google, noise_cancellation
 from livekit.agents.voice import RunContext
 
 from utils import load_prompt
 
-logger = logging.getLogger("medical-vision-assistant")
-logger.setLevel(logging.INFO)
-
 load_dotenv()
 
+logger = logging.getLogger("medical-vision-assistant")
+logger.setLevel(logging.INFO)
 
 MODEL = "gemini-live-2.5-flash-preview"
 TEMP = 0.8
@@ -35,7 +30,7 @@ TEMP = 0.8
 
 @dataclass
 class UserData:
-    """Stores data and agents to be shared across the medical session"""
+    """Stores data and agents to be shared across the session"""
 
     personas: dict[str, Agent] = field(default_factory=dict)
     prev_agent: Optional[Agent] = None

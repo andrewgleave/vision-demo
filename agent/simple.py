@@ -1,12 +1,9 @@
 # flake8: noqa: E501
 
 import logging
-import asyncio
-import base64
+
 from dotenv import load_dotenv
-
 from google.genai import types
-
 from livekit.agents import (
     Agent,
     AgentSession,
@@ -14,14 +11,13 @@ from livekit.agents import (
     RoomInputOptions,
     WorkerOptions,
     cli,
-    get_job_context,
 )
-from livekit.agents.llm import ImageContent
 from livekit.plugins import google, noise_cancellation
 
-logger = logging.getLogger("vision-assistant")
 
 load_dotenv()
+
+logger = logging.getLogger("vision-assistant")
 
 SYSTEM_PROMPT = """
 You are a helpful voice and video assistant. Your user is interacting with you via a smartphone app and may speak by using their microphone.

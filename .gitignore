@@ -7,3 +7,5 @@ xcuserdata
 __pycache__
 swift-frontend/build
 .venv
+.ruff_cache
+KMS
