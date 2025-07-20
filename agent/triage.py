@@ -96,7 +96,7 @@ class SupportAgent(BaseAgent):
             instructions=load_prompt("support_prompt.yaml"),
             llm=google.beta.realtime.RealtimeModel(
                 model=MODEL,
-                voice="Charon",
+                voice="Charon",  # custom voice for support agent
                 temperature=TEMP,
             ),
         )
@@ -116,7 +116,7 @@ class BillingAgent(BaseAgent):
             instructions=load_prompt("billing_prompt.yaml"),
             llm=google.beta.realtime.RealtimeModel(
                 model=MODEL,
-                voice="Kore",
+                voice="Kore",  # custom voice for billing agent
                 temperature=TEMP,
             ),
         )
@@ -141,7 +141,11 @@ async def entrypoint(ctx: JobContext):
 
     # Register all agents in the userdata
     userdata.personas.update(
-        {"triage": triage_agent, "support": support_agent, "billing": billing_agent}
+        {
+            "triage": triage_agent,
+            "support": support_agent,
+            "billing": billing_agent,
+        }
     )
 
     session = AgentSession[UserData](
@@ -154,7 +158,7 @@ async def entrypoint(ctx: JobContext):
     )
 
     await session.start(
-        agent=triage_agent,  # Start with the Medical Office Triage agent
+        agent=triage_agent,  # Start with TriageAgent
         room=ctx.room,
         room_input_options=RoomInputOptions(
             video_enabled=True,
